@@ -1,5 +1,6 @@
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -8,32 +9,31 @@ public class Excercise {
 
 	public static void main(String[] args) {
 	// TODO Auto-generated method stub
-		String names[] = {"abcaaaaaaaaaa","defd","dsdfds"};
-		for(int i=0;i<names.length;i++){
-			String name = names[i];
-			HashSet set = new HashSet();
-			for(int j=0;j<name.length();j++){
-				set.add(name.charAt(j));
-			}
-			char ch[] = new char[set.size()];
-			Iterator it = set.iterator();
-			while(it.hasNext()){
-				for(int k=0;k<ch.length;k++){
-					ch[k] = (char)it.next();
+		String name;
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter the name to check");
+		name = s.nextLine();
+		StringBuilder rev = new StringBuilder();
+		for(int i=0;i<name.length();i++){
+			boolean isNumber = false;
+			for(char ch='a';ch<='z';ch++){
+				if(name.charAt(i) == ch){
+					isNumber = true;
+					break;
+				}else{
+					isNumber = false;
 				}
 			}
-			System.out.println(name);
-			for(int l=0;l<ch.length;l++){
-				int count = 0;
-				for(int m=0;m<name.length();m++){
-					if(ch[l] == name.charAt(m)){
-						count++;
+			if(isNumber){
+				rev = rev.append(name.charAt(i));
+			}else{
+				int number=Character.getNumericValue(name.charAt(i));
+					for(int j=1;j<=number;j++){
+						rev = rev.append(name.charAt(i-1));
 					}
-				}
-				
-				System.out.println(ch[l]+"  comes "+count+" times");
 			}
 		}
+		System.out.println(rev);
 
 	}
 }
